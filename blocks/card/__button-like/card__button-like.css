@@ -1,0 +1,12 @@
+.card__button-like {
+  min-width: 20px;
+  height: 18px;
+
+  background-image: url(../../../images/icon-like.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card__button-like:hover {
+  opacity: .5;
+}

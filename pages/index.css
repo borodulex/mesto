@@ -16,3 +16,14 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__info-container/rofile__info-container.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__wrapper/cards__wrapper.css);
+@import url(../blocks/cards/__grid/cards__grid.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__figure/card__figure.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__body/card__body.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__button-like/card__button-like.css);
