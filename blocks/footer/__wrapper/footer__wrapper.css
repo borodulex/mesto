@@ -1,0 +1,8 @@
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+
+  max-width: 880px;
+  min-height: 144px;
+  margin: 0 auto;
+}

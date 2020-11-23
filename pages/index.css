@@ -3,9 +3,11 @@
 
 @import url(../blocks/root/root.css);
 @import url(../blocks/page/page.css);
+
+@import url(../blocks/logo/logo.css);
+
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__wrapper/header__wrapper.css);
-@import url(../blocks/logo/logo.css);
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__wrapper/profile__wrapper.css);
@@ -27,3 +29,24 @@
 @import url(../blocks/card/__body/card__body.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__button-like/card__button-like.css);
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__wrapper/footer__wrapper.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+
+  max-width: 880px;
+  min-height: 144px;
+  margin: 0 auto;
+}
+
+.footer__copyright {
+  color: #545454;
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+}
