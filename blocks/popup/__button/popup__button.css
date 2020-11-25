@@ -1,0 +1,14 @@
+.popup__button {
+  min-height: 50px;
+
+  color: #fff;
+  border: 0;
+  background-color: #000;
+
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.popup__button:hover {
+  background-color: rgba(0, 0, 0, .8);
+}

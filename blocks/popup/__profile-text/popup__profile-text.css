@@ -1,0 +1,4 @@
+.popup__profile-text {
+  display: flex;
+  flex-direction: column;
+}

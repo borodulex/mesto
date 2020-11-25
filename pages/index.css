@@ -34,19 +34,12 @@
 @import url(../blocks/footer/__wrapper/footer__wrapper.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-.footer__wrapper {
-  display: flex;
-  align-items: center;
-
-  max-width: 880px;
-  min-height: 144px;
-  margin: 0 auto;
-}
-
-.footer__copyright {
-  color: #545454;
-
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.2;
-}
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__cantainer.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__profile-text/popup__profile-text.css);
+@import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__button-close/popup__button-close.css);
+@import url(../blocks/popup/__opened/popup__opened.css);
