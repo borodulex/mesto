@@ -27,9 +27,9 @@
                 <h2 class="profile__title">Жак-Ив Кусто</h2>
                 <p class="profile__subtitle">Исследователь океана</p>
               </div>
-              <div class="profile__edit-button"></div>
+              <button class="profile__button-edit"></button>
             </div>
-            <div class="profile__add-button"></div>
+            <div class="profile__add-button" type="button"></div>
           </div>
         </section>
         <section class="cards">
@@ -146,17 +146,21 @@
           <p class="footer__copyright">© 2020 Mesto Russia</p>
         </div>
       </footer>
-      <div class="popup popup__opened">
+      <div class="popup">
         <div class="popup__container">
-          <div class="popup__button-close"></div>
+          <button class="popup__button-close"></button>
           <form action="" class="popup__form">
             <h3 class="popup__title">Редактировать профиль</h3>
             <div class="popup__profile-text">
-              <input type="text" class="popup__input" value="Жак-Ив Кусто" />
               <input
                 type="text"
-                class="popup__input"
-                value="Исследователь океана"
+                class="popup__input popup__input_type_name"
+                value="Тест 1"
+              />
+              <input
+                type="text"
+                class="popup__input popup__input_type_job"
+                value="Тест 2"
               />
             </div>
             <button class="popup__button">Сохранить</button>
@@ -164,5 +168,6 @@
         </div>
       </div>
     </div>
+    <script src="pages/script.js"></script>
   </body>
 </html>

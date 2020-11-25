@@ -1,5 +1,11 @@
 .profile__title {
+  overflow: hidden;
+
+  max-width: 590px;
   margin: 0;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   font-size: 42px;
   font-weight: 400;
