@@ -29,4 +29,4 @@ Page is optimized for the following device resolutions:
 
 ## How to use
 
-Visit this [page](https://borodulex.github.io/russian-travel/) or download the files and open index.html with browser. Tested out in Firefox, Google Chrome and Yandex Browser.
+Visit this [page](https://borodulex.github.io/mesto/index.html) or download the files and open index.html with browser. Tested out in Firefox, Google Chrome and Yandex Browser.
