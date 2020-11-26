@@ -9,7 +9,7 @@
   border-bottom: .5px solid rgba(84, 84, 84, .7);
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 425px) {
   .header__wrapper {
     width: 100%;
     min-height: 83px;

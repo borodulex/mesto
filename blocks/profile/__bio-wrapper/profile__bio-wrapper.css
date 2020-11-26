@@ -2,7 +2,7 @@
   display: flex;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 425px) {
   .profile__bio-wrapper {
     margin-top: 27px;
   }

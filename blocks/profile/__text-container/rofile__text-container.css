@@ -1,9 +1,23 @@
 .profile__text-container {
+  max-width: 590px;
   margin-left: 32px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 900px) {
   .profile__text-container {
+    max-width: calc(100vw - 336px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__text-container {
+    max-width: calc(100vw - 280px);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__text-container {
+    max-width: calc(100vw - 100px);
     margin-left: 22px;
 
     text-align: center;
