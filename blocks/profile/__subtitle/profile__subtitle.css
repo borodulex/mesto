@@ -2,7 +2,7 @@
   overflow: hidden;
 
   max-width: 590px;
-  margin: 16px 0 0;
+  margin: 8px 0 0;
 
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 320px) {
   .profile__subtitle {
-    margin-top: 14px;
+    margin-top: 8px;
 
     font-size: 14px;
     line-height: 1.2;

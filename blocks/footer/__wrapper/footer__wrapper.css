@@ -6,3 +6,9 @@
   min-height: 144px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 320px) {
+  .footer__wrapper {
+    min-height: 88px;
+  }
+}

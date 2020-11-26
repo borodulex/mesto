@@ -1,5 +1,6 @@
 .popup__button {
   min-height: 50px;
+  margin-top: 48px;
 
   transition: background-color .3s ease-out;
 
@@ -20,6 +21,7 @@
 @media screen and (max-width: 320px) {
   .popup__button {
     min-height: 46px;
+    margin-top: 45px;
 
     font-size: 14px;
   }

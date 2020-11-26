@@ -1,10 +1,10 @@
 .popup__button-close {
   position: absolute;
-  top: -36px;
+  top: -37px;
   right: -36px;
 
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 
   transition: opacity .3s ease-out;
 
@@ -24,10 +24,10 @@
 
 @media screen and (max-width: 320px) {
   .popup__button-close {
-    top: -60px;
-    right: 0;
+    top: -44px;
+    right: 7px;
 
-    width: 26px;
-    height: 26px;
+    width: 21px;
+    height: 21px;
   }
 }

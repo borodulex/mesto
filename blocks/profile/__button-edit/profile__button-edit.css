@@ -2,7 +2,7 @@
   box-sizing: border-box;
   width: 24px;
   height: 24px;
-  margin: 0 0 26px 18px;
+  margin: 15px 0 0 22px;
 
   transition: opacity .3s ease-out;
 
@@ -23,6 +23,8 @@
   .profile__button-edit {
     align-self: flex-start;
 
-    margin: 5px 0 0 8px;
+    width: 18px;
+    height: 18px;
+    margin: 7px 0 0 10px;
   }
 }
