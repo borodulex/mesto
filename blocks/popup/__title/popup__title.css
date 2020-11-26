@@ -5,3 +5,9 @@
   font-weight: 900;
   line-height: 1.2;
 }
+
+@media screen and (max-width: 320px) {
+  .popup__title {
+    font-size: 18px;
+  }
+}

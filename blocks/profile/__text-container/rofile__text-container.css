@@ -1,0 +1,12 @@
+.profile__text-container {
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__text-container {
+    text-align: center;
+
+    font-size: 27px;
+    line-height: 1.2;
+  }
+}
