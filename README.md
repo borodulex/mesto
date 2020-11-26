@@ -1,17 +1,32 @@
-# Проект 4: Место
+# Project 4: Mesto
 
-### Обзор
+## About
 
-* Figma
-* Картинки
+The project is an web service with interactive web page, where user able to upload/remove photos and put likes to images.
+It was developed using the knowledge gained from the fifth course for web-developers at Yandex.Praktikum.
 
-**Figma**
+Page is optimized for the following device resolutions:
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+- 1024px
+- 768px
+- 320px
 
-**Картинки**
+## Used languages, technoligies, methodologies
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+- _(new)_ Javascript
+- _(new)_ HTML form
+- Grid layout
+- Media queries
+- Font smoothing
+- Figma
+- HTML
+- CSS
+- Semantic markup
+- Flexbox
+- CSS animations
+- BEM methodology
+- BEM nested file structure
 
-Удачи!
+## How to use
+
+Visit this [page](https://borodulex.github.io/russian-travel/) or download the files and open index.html with browser. Tested out in Firefox, Google Chrome and Yandex Browser.
