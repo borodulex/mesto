@@ -4,8 +4,7 @@
   justify-content: space-between;
 
   max-width: 888px;
-  min-height: 200px;
-  margin: 0 auto;
+  margin: 40px auto 0;
 }
 
 @media screen and (max-width: 600px) {
@@ -13,13 +12,5 @@
     flex-direction: column;
 
     margin-top: 42px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .profile__wrapper {
-    flex-direction: column;
-
-    min-height: 286px;
   }
 }

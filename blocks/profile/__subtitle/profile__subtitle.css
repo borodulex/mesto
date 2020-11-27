@@ -1,7 +1,6 @@
 .profile__subtitle {
   overflow: hidden;
 
-  max-width: 590px;
   margin: 8px 0 0;
 
   white-space: nowrap;
@@ -12,10 +11,16 @@
   line-height: 1.2;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 530px) {
   .profile__subtitle {
     margin-top: 8px;
 
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__subtitle {
     font-size: 14px;
     line-height: 1.2;
   }

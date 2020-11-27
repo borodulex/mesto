@@ -15,14 +15,14 @@
   }
 }
 
+@media screen and (max-width: 530px) {
+  .profile__text-container {
+    max-width: calc(100vw - 120px);
+  }
+}
+
 @media screen and (max-width: 425px) {
   .profile__text-container {
-    max-width: calc(100vw - 100px);
     margin-left: 22px;
-
-    text-align: center;
-
-    font-size: 27px;
-    line-height: 1.2;
   }
 }

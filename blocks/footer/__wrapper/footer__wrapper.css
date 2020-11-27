@@ -1,14 +1,4 @@
 .footer__wrapper {
-  display: flex;
-  align-items: center;
-
   max-width: 880px;
-  min-height: 144px;
   margin: 0 auto;
-}
-
-@media screen and (max-width: 425px) {
-  .footer__wrapper {
-    min-height: 88px;
-  }
 }

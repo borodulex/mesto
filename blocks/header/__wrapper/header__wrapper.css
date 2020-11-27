@@ -1,9 +1,6 @@
 .header__wrapper {
-  display: flex;
-  align-items: center;
-
   max-width: 872px;
-  min-height: 118px;
+  /* min-height: 118px; */
   margin: 0 auto;
 
   border-bottom: .5px solid rgba(84, 84, 84, .7);
@@ -12,6 +9,6 @@
 @media screen and (max-width: 425px) {
   .header__wrapper {
     width: 100%;
-    min-height: 83px;
+    /* min-height: 83px; */
   }
 }

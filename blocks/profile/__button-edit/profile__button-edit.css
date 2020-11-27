@@ -26,5 +26,7 @@
     width: 18px;
     height: 18px;
     margin: 7px 0 0 10px;
+
+    background-size: 45%;
   }
 }

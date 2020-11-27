@@ -8,12 +8,6 @@
   background-size: cover;
 }
 
-@media screen and (max-width: 900px) {
-  .logo {
-    margin: 0 0 3px 27px;
-  }
-}
-
 @media screen and (max-width: 425px) {
   .logo {
     width: 103px;

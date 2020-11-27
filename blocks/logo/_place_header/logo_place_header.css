@@ -1,0 +1,15 @@
+.logo_place_header {
+  margin: 45px 0 40px;
+}
+
+@media screen and (max-width: 900px) {
+  .logo_place_header {
+    margin-left: 27px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .logo_place_header {
+    margin: 28px 0 31px 27px;
+  }
+}
