@@ -1,17 +1,17 @@
-# Project 4: Mesto
+# Проект 4: Mesto
 
-## About
+## О проекте
 
-The project is an web service with interactive web page, where user able to upload/remove photos and put likes to images.
-It was developed using the knowledge gained from the fifth course for web-developers at Yandex.Praktikum.
+Проект представляет из себя веб-сервис с интерактивной веб-страницей, где пользователь может редактировать данный профиля, загружать/удалять фотографии и ставить лайки на изображения.
+Проект был разработан с использованием знаний, полученных на пятом курсе для веб-разработчиков в Яндекс.Практикум.
 
-Page is optimized for the following device resolutions:
+Страница оптимизирована для следующих разрешений:
 
 - 1024px
 - 768px
 - 320px
 
-## Used languages, technoligies, methodologies
+## Использованные языки, технологии и методологии
 
 - _(new)_ Javascript
 - _(new)_ HTML form
@@ -27,6 +27,6 @@ Page is optimized for the following device resolutions:
 - BEM methodology
 - BEM nested file structure
 
-## How to use
+## Как использовать
 
-Visit this [page](https://borodulex.github.io/mesto/index.html) or download the files and open index.html with browser. Tested out in Firefox, Google Chrome and Yandex Browser.
+Посетите эту [страницу](https://borodulex.github.io/mesto/index.html) или загрузите файлы и откройте index.html с помощью браузера. Работоспособность проверена в Firefox, Google Chrome и Яндекс браузере.

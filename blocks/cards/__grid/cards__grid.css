@@ -1,11 +1,7 @@
 .cards__grid {
   display: grid;
   justify-content: center;
-
   margin: 50px auto 0;
-  padding-left: 0;
-
-  list-style: none;
 
   grid-template-columns: repeat(3, 282px);
   grid-auto-rows: 1fr;

@@ -1,7 +1,6 @@
 .popup__profile-text {
   display: flex;
   flex-direction: column;
-
   margin-top: 42px;
 }
 

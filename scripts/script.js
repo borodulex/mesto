@@ -12,6 +12,20 @@ let jobInput = popupNode.querySelector(".popup__input_type_job");
 
 let formElement = popupNode.querySelector(".popup__form");
 
+// Открытие попапа при нажатии на кнопку редактирования
+function showPopup() {
+  popupNode.classList.add("popup_opened");
+
+  //Автозаполнение полей ввода текущими значениями
+  nameInput.value = nameElement.textContent;
+  jobInput.value = jobElement.textContent;
+}
+
+// Закрытие попапа при нажатии на кнопку крестика
+function closePopup() {
+  popupNode.classList.remove("popup_opened");
+}
+
 //Функцилнал popup
 function formSubmitHandler(evt) {
   //Отмена стандартной отправки формы
@@ -23,22 +37,6 @@ function formSubmitHandler(evt) {
   closePopup();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
-
-// Открытие попапа при нажатии на кнопку редактирования
-function showPopup() {
-  popupNode.classList.add("popup__opened");
-
-  //Автозаполнение полей ввода текущими значениями
-  nameInput.value = nameElement.textContent;
-  jobInput.value = jobElement.textContent;
-}
-
 editButton.addEventListener("click", showPopup);
-
-// Закрытие попапа при нажатии на кнопку крестика
-function closePopup() {
-  popupNode.classList.remove("popup__opened");
-}
-
 closeButton.addEventListener("click", closePopup);
+formElement.addEventListener("submit", formSubmitHandler);

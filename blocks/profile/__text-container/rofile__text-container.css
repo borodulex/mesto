@@ -1,21 +1,21 @@
 .profile__text-container {
-  max-width: 590px;
+  max-width: 490px;
   margin-left: 32px;
 }
 
 @media screen and (max-width: 900px) {
   .profile__text-container {
-    max-width: calc(100vw - 336px);
+    max-width: calc(100vw - 436px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile__text-container {
+    max-width: calc(100vw - 250px);
   }
 }
 
 @media screen and (max-width: 600px) {
-  .profile__text-container {
-    max-width: calc(100vw - 280px);
-  }
-}
-
-@media screen and (max-width: 530px) {
   .profile__text-container {
     max-width: calc(100vw - 120px);
   }
