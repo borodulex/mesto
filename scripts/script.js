@@ -1,17 +1,17 @@
 const popupEdit = document.querySelector(".popup_type_profile-edit");
 const popupNewItem = document.querySelector(".popup_type_card-add");
-const profile = document.querySelector(".profile");
+const profileNode = document.querySelector(".profile");
 const cardsNode = document.querySelector('.cards__grid');
 
 const cardTemplate = document.querySelector('#card-template');
 
-const editButton = profile.querySelector(".profile__button-edit");
-const addButton = profile.querySelector(".profile__button-add");
+const editButton = profileNode.querySelector(".profile__button-edit");
+const addButton = profileNode.querySelector(".profile__button-add");
 const closeButtonPopupEdit = popupEdit.querySelector(".popup__button-close");
 const closeButtonPopupNewItem = popupNewItem.querySelector(".popup__button-close");
 
-const nameElement = profile.querySelector(".profile__title");
-const jobElement = profile.querySelector(".profile__subtitle");
+const nameElement = profileNode.querySelector(".profile__title");
+const jobElement = profileNode.querySelector(".profile__subtitle");
 
 const editFormElement = popupEdit.querySelector(".popup__form");
 const nameInput = popupEdit.querySelector(".popup__input_type_name");
@@ -54,9 +54,10 @@ const initialCards = [
 ];
 
 initialCards.forEach(function (item) {
-  const cardElement = cardTemplate.content.cloneNode(true); // ? Почему cardElement === null если вынести эту строку вне тела фунцкции
+  const cardElement = cardTemplate.content.cloneNode(true);
   cardElement.querySelector('.card__title').textContent = item.name;
   cardElement.querySelector('.card__image').src = item.link;
+  likeButtonHandler(cardElement);
   cardsNode.append(cardElement);
 });
 
@@ -88,12 +89,20 @@ function newItemFormSubmitHandler(evt) {
   const cardElement = cardTemplate.content.cloneNode(true);
   cardElement.querySelector('.card__title').textContent = placeInput.value;
   cardElement.querySelector('.card__image').src = linkInput.value;
+  likeButtonHandler(cardElement);
   cardsNode.prepend(cardElement);
 
   placeInput.value = "";
   linkInput.value = "";
 
   closePopup(popupNewItem);
+}
+
+// Функционал кнопки лайк
+function likeButtonHandler(element) {
+  element.querySelector(".card__button-like").addEventListener("click", evt => {
+    evt.target.classList.toggle("card__button-like_active");
+  });
 }
 
 editButton.addEventListener("click", () => {
@@ -110,9 +119,6 @@ closeButtonPopupNewItem.addEventListener("click", () => {
 });
 editFormElement.addEventListener("submit", editFormSubmitHandler);
 newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
-
-
-
 
 
 
