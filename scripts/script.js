@@ -1,16 +1,19 @@
-let popupNode = document.querySelector(".popup");
-let profileNode = document.querySelector(".profile");
+const popupEdit = document.querySelector(".popup_type_profile-edit");
+const popupNewItem = document.querySelector(".popup_type_card-add");
+const profile = document.querySelector(".profile");
 
-let editButton = profileNode.querySelector(".profile__button-edit");
-let closeButton = popupNode.querySelector(".popup__button-close");
+const editButton = profile.querySelector(".profile__button-edit");
+const addButton = profile.querySelector(".profile__button-add");
+const closeButtonPopupEdit = popupEdit.querySelector(".popup__button-close");
+const closeButtonPopupNewItem = popupNewItem.querySelector(".popup__button-close");
 
-let nameElement = profileNode.querySelector(".profile__title");
-let jobElement = profileNode.querySelector(".profile__subtitle");
+const nameElement = profile.querySelector(".profile__title");
+const jobElement = profile.querySelector(".profile__subtitle");
 
-let nameInput = popupNode.querySelector(".popup__input_type_name");
-let jobInput = popupNode.querySelector(".popup__input_type_job");
+const nameInput = popupEdit.querySelector(".popup__input_type_name");
+const jobInput = popupEdit.querySelector(".popup__input_type_job");
 
-let formElement = popupNode.querySelector(".popup__form");
+const formElement = popupEdit.querySelector(".popup__form");
 
 // Предварительная загрузка карточек при загрузке
 const initialCards = [
@@ -50,18 +53,18 @@ initialCards.forEach(function (item) {
   cardsNode.append(cardElement);
 });
 
-// Открытие попапа при нажатии на кнопку редактирования
-function showPopup() {
-  popupNode.classList.add("popup_opened");
+//Автозаполнение полей ввода текущими значениями
+nameInput.value = nameElement.textContent;
+jobInput.value = jobElement.textContent;
 
-  //Автозаполнение полей ввода текущими значениями
-  nameInput.value = nameElement.textContent;
-  jobInput.value = jobElement.textContent;
+// Открытие попапа при нажатии на кнопку редактирования
+function showPopup(popupElement) {
+  popupElement.classList.add("popup_opened");
 }
 
 // Закрытие попапа при нажатии на кнопку крестика
-function closePopup() {
-  popupNode.classList.remove("popup_opened");
+function closePopup(popupElement) {
+  popupElement.classList.remove("popup_opened");
 }
 
 //Функционал popup
@@ -72,17 +75,21 @@ function formSubmitHandler(evt) {
   nameElement.textContent = nameInput.value;
   jobElement.textContent = jobInput.value;
 
-  closePopup();
+  closePopup(popupEdit);
 }
 
-editButton.addEventListener("click", showPopup);
-closeButton.addEventListener("click", closePopup);
+editButton.addEventListener("click", () => {
+  showPopup(popupEdit);
+});
+addButton.addEventListener("click", () => {
+  showPopup(popupNewItem);
+});
+closeButtonPopupEdit.addEventListener("click", () => {
+  closePopup(popupEdit);
+});
+closeButtonPopupNewItem.addEventListener("click", () => {
+  closePopup(popupNewItem);
+});
 formElement.addEventListener("submit", formSubmitHandler);
-
-
-
-//ТЕСТОВЫЙ ПОЛИГОН
-
-
 
 
