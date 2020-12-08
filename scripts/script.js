@@ -1,6 +1,9 @@
 const popupEdit = document.querySelector(".popup_type_profile-edit");
 const popupNewItem = document.querySelector(".popup_type_card-add");
 const profile = document.querySelector(".profile");
+const cardsNode = document.querySelector('.cards__grid');
+
+const cardTemplate = document.querySelector('#card-template');
 
 const editButton = profile.querySelector(".profile__button-edit");
 const addButton = profile.querySelector(".profile__button-add");
@@ -10,10 +13,17 @@ const closeButtonPopupNewItem = popupNewItem.querySelector(".popup__button-close
 const nameElement = profile.querySelector(".profile__title");
 const jobElement = profile.querySelector(".profile__subtitle");
 
+const editFormElement = popupEdit.querySelector(".popup__form");
 const nameInput = popupEdit.querySelector(".popup__input_type_name");
 const jobInput = popupEdit.querySelector(".popup__input_type_job");
 
-const formElement = popupEdit.querySelector(".popup__form");
+const newItemFormElement = popupNewItem.querySelector(".popup__form");
+const placeInput = popupNewItem.querySelector(".popup__input_type_place");
+const linkInput = popupNewItem.querySelector(".popup__input_type_link");
+
+//Автозаполнение полей ввода текущими значениями
+nameInput.value = nameElement.textContent;
+jobInput.value = jobElement.textContent;
 
 // Предварительная загрузка карточек при загрузке
 const initialCards = [
@@ -43,19 +53,12 @@ const initialCards = [
   }
 ];
 
-const cardTemplate = document.querySelector('#card-template');
-const cardsNode = document.querySelector('.cards__grid');
-
 initialCards.forEach(function (item) {
   const cardElement = cardTemplate.content.cloneNode(true); // ? Почему cardElement === null если вынести эту строку вне тела фунцкции
   cardElement.querySelector('.card__title').textContent = item.name;
   cardElement.querySelector('.card__image').src = item.link;
   cardsNode.append(cardElement);
 });
-
-//Автозаполнение полей ввода текущими значениями
-nameInput.value = nameElement.textContent;
-jobInput.value = jobElement.textContent;
 
 // Открытие попапа при нажатии на кнопку редактирования
 function showPopup(popupElement) {
@@ -67,8 +70,8 @@ function closePopup(popupElement) {
   popupElement.classList.remove("popup_opened");
 }
 
-//Функционал popup
-function formSubmitHandler(evt) {
+//Функционал popupEdit
+function editFormSubmitHandler(evt) {
   //Отмена стандартной отправки формы
   evt.preventDefault();
 
@@ -76,6 +79,21 @@ function formSubmitHandler(evt) {
   jobElement.textContent = jobInput.value;
 
   closePopup(popupEdit);
+}
+
+//Функционал popupNewItem
+function newItemFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  const cardElement = cardTemplate.content.cloneNode(true);
+  cardElement.querySelector('.card__title').textContent = placeInput.value;
+  cardElement.querySelector('.card__image').src = linkInput.value;
+  cardsNode.prepend(cardElement);
+
+  placeInput.value = "";
+  linkInput.value = "";
+
+  closePopup(popupNewItem);
 }
 
 editButton.addEventListener("click", () => {
@@ -90,6 +108,11 @@ closeButtonPopupEdit.addEventListener("click", () => {
 closeButtonPopupNewItem.addEventListener("click", () => {
   closePopup(popupNewItem);
 });
-formElement.addEventListener("submit", formSubmitHandler);
+editFormElement.addEventListener("submit", editFormSubmitHandler);
+newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
+
+
+
+
 
 
