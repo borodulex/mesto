@@ -58,6 +58,7 @@ initialCards.forEach(function (item) {
   cardElement.querySelector('.card__title').textContent = item.name;
   cardElement.querySelector('.card__image').src = item.link;
   likeButtonHandler(cardElement);
+  removeCardHandler(cardElement);
   cardsNode.append(cardElement);
 });
 
@@ -90,6 +91,7 @@ function newItemFormSubmitHandler(evt) {
   cardElement.querySelector('.card__title').textContent = placeInput.value;
   cardElement.querySelector('.card__image').src = linkInput.value;
   likeButtonHandler(cardElement);
+  removeCardHandler(cardElement);
   cardsNode.prepend(cardElement);
 
   placeInput.value = "";
@@ -103,6 +105,13 @@ function likeButtonHandler(element) {
   element.querySelector(".card__button-like").addEventListener("click", evt => {
     evt.target.classList.toggle("card__button-like_active");
   });
+}
+
+// Функционал кнопки удаления карточки
+function removeCardHandler(element) {
+  element.querySelector(".card__button-remove").addEventListener("click", evt => {
+    evt.target.closest(".card").remove();
+  })
 }
 
 editButton.addEventListener("click", () => {
