@@ -1,0 +1,6 @@
+@media screen and (max-width: 530px) {
+  .popup__container_type_card-add {
+    margin: 0 40px;
+    padding: 31px 21px;
+  }
+}
