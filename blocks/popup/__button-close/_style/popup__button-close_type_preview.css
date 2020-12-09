@@ -1,0 +1,8 @@
+@media screen and (max-width: 530px) {
+  .popup__button-close_type_preview {
+    top: -26px;
+    right: -27px;
+    width: 24px;
+    height: 24px;
+  }
+}
