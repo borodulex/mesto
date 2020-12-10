@@ -27,7 +27,6 @@ const linkInput = popupNewItem.querySelector(".popup__input_type_link");
 nameInput.value = nameElement.textContent;
 jobInput.value = jobElement.textContent;
 
-// Предварительная загрузка карточек при загрузке
 const initialCards = [
   {
     name: 'Архыз',
@@ -55,6 +54,7 @@ const initialCards = [
   }
 ];
 
+// Предварительная загрузка карточек при загрузке страницы
 initialCards.forEach(function (item) {
   const cardElement = cardTemplate.content.cloneNode(true);
   cardElement.querySelector('.card__title').textContent = item.name;
@@ -69,8 +69,6 @@ initialCards.forEach(function (item) {
 function showPopup(popupElement) {
   popupElement.classList.add("popup_opened");
 }
-
-
 
 // Закрытие попапа при нажатии на кнопку крестика
 function closePopup(popupElement) {
@@ -125,7 +123,6 @@ function showPopupPreviewHandler(element) {
   element.querySelector(".card__image").addEventListener("click", evt => {
     const cardTitle = evt.target.parentElement.querySelector(".card__title").textContent;
     const cardImgSrc = evt.target.src;
-
     popupPreview.querySelector(".popup__caption").textContent = cardTitle;
     popupPreview.querySelector(".popup__image").src = cardImgSrc;
     showPopup(popupPreview);
