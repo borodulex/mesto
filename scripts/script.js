@@ -23,10 +23,6 @@ const newItemFormElement = popupNewItem.querySelector(".popup__form");
 const placeInput = popupNewItem.querySelector(".popup__input_type_place");
 const linkInput = popupNewItem.querySelector(".popup__input_type_link");
 
-//Автозаполнение полей ввода текущими значениями
-nameInput.value = nameElement.textContent;
-jobInput.value = jobElement.textContent;
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -57,11 +53,13 @@ const initialCards = [
 // Предварительная загрузка карточек при загрузке страницы
 initialCards.forEach(function (item) {
   const cardElement = cardTemplate.content.cloneNode(true);
+
+  addCardElementHandlers(cardElement);
+
   cardElement.querySelector('.card__title').textContent = item.name;
   cardElement.querySelector('.card__image').src = item.link;
-  likeButtonHandler(cardElement);
-  removeCardHandler(cardElement);
-  showPopupPreviewHandler(cardElement);
+  cardElement.querySelector('.card__image').alt = item.name;
+
   cardsNode.append(cardElement);
 });
 
@@ -91,15 +89,16 @@ function newItemFormSubmitHandler(evt) {
   evt.preventDefault();
 
   const cardElement = cardTemplate.content.cloneNode(true);
+
+  addCardElementHandlers(cardElement);
+
   cardElement.querySelector('.card__title').textContent = placeInput.value;
   cardElement.querySelector('.card__image').src = linkInput.value;
-  likeButtonHandler(cardElement);
-  removeCardHandler(cardElement);
-  showPopupPreviewHandler(cardElement);
+  cardElement.querySelector('.card__image').alt = placeInput.value;
+
   cardsNode.prepend(cardElement);
 
-  placeInput.value = "";
-  linkInput.value = "";
+  newItemFormElement.reset();
 
   closePopup(popupNewItem);
 }
@@ -125,11 +124,25 @@ function showPopupPreviewHandler(element) {
     const cardImgSrc = evt.target.src;
     popupPreview.querySelector(".popup__caption").textContent = cardTitle;
     popupPreview.querySelector(".popup__image").src = cardImgSrc;
+    popupPreview.querySelector(".popup__image").alt = cardTitle;
+
     showPopup(popupPreview);
   });
 }
 
+// Обработчик новых карточек
+function addCardElementHandlers(element) {
+  likeButtonHandler(element);
+  removeCardHandler(element);
+  showPopupPreviewHandler(element);
+  return element;
+}
+
 editButton.addEventListener("click", () => {
+  //Автозаполнение полей ввода текущими значениями
+  nameInput.value = nameElement.textContent;
+  jobInput.value = jobElement.textContent;
+
   showPopup(popupEdit);
 });
 addButton.addEventListener("click", () => {
