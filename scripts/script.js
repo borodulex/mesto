@@ -52,26 +52,11 @@ const initialCards = [
 
 // Предварительная загрузка карточек при загрузке страницы
 initialCards.forEach(function (item) {
-  const cardElement = cardTemplate.content.cloneNode(true);
-
-  addCardElementHandlers(cardElement);
-
-  cardElement.querySelector('.card__title').textContent = item.name;
-  cardElement.querySelector('.card__image').src = item.link;
-  cardElement.querySelector('.card__image').alt = item.name;
-
-  cardsNode.append(cardElement);
+  const placeName = item.name;
+  const placeImgLink = item.link;
+  const preparedCard = initCardElement(placeName, placeImgLink);
+  cardsNode.append(preparedCard);
 });
-
-// Открытие попапа при нажатии на кнопку редактирования
-function showPopup(popupElement) {
-  popupElement.classList.add("popup_opened");
-}
-
-// Закрытие попапа при нажатии на кнопку крестика
-function closePopup(popupElement) {
-  popupElement.classList.remove("popup_opened");
-}
 
 //Функционал popupEdit
 function editFormSubmitHandler(evt) {
@@ -87,20 +72,55 @@ function editFormSubmitHandler(evt) {
 //Функционал popupNewItem
 function newItemFormSubmitHandler(evt) {
   evt.preventDefault();
-
-  const cardElement = cardTemplate.content.cloneNode(true);
-
-  addCardElementHandlers(cardElement);
-
-  cardElement.querySelector('.card__title').textContent = placeInput.value;
-  cardElement.querySelector('.card__image').src = linkInput.value;
-  cardElement.querySelector('.card__image').alt = placeInput.value;
-
-  cardsNode.prepend(cardElement);
-
+  const placeName = placeInput.value;
+  const placeImgLink = linkInput.value;
+  const preparedCard = initCardElement(placeName, placeImgLink);
+  cardsNode.prepend(preparedCard);
   newItemFormElement.reset();
-
   closePopup(popupNewItem);
+}
+
+// Открытие попапа с превью при нажатии на изображение
+function showPopupPreviewHandler(element) {
+  element.querySelector(".card__image").addEventListener("click", evt => {
+    const cardTitle = evt.target.parentElement.querySelector(".card__title").textContent;
+    const cardImgSrc = evt.target.src;
+    const popupCaption = popupPreview.querySelector(".popup__caption");
+    const popupImage = popupPreview.querySelector(".popup__image");
+
+    popupCaption.textContent = cardTitle;
+    popupImage.src = cardImgSrc;
+    popupImage.alt = cardTitle;
+
+    showPopup(popupPreview);
+  });
+}
+
+//Функция подготовки новой карточки
+function initCardElement(name, link) {
+  const cardElement = cardTemplate.content.cloneNode(true);
+  const cardTitleElement = cardElement.querySelector('.card__title');
+  const cardImageElement = cardElement.querySelector('.card__image');
+
+  cardTitleElement.textContent = name;
+  cardImageElement.src = link;
+  cardImageElement.alt = name;
+
+  likeButtonHandler(cardElement);
+  removeCardHandler(cardElement);
+  showPopupPreviewHandler(cardElement);
+
+  return cardElement;
+}
+
+// Открытие попапа при нажатии на кнопку редактирования
+function showPopup(popupElement) {
+  popupElement.classList.add("popup_opened");
+}
+
+// Закрытие попапа при нажатии на кнопку крестика
+function closePopup(popupElement) {
+  popupElement.classList.remove("popup_opened");
 }
 
 // Функционал кнопки лайк
@@ -117,26 +137,6 @@ function removeCardHandler(element) {
   })
 }
 
-// Открытие попапа с превью при нажатии на изображение
-function showPopupPreviewHandler(element) {
-  element.querySelector(".card__image").addEventListener("click", evt => {
-    const cardTitle = evt.target.parentElement.querySelector(".card__title").textContent;
-    const cardImgSrc = evt.target.src;
-    popupPreview.querySelector(".popup__caption").textContent = cardTitle;
-    popupPreview.querySelector(".popup__image").src = cardImgSrc;
-    popupPreview.querySelector(".popup__image").alt = cardTitle;
-
-    showPopup(popupPreview);
-  });
-}
-
-// Обработчик новых карточек
-function addCardElementHandlers(element) {
-  likeButtonHandler(element);
-  removeCardHandler(element);
-  showPopupPreviewHandler(element);
-  return element;
-}
 
 editButton.addEventListener("click", () => {
   //Автозаполнение полей ввода текущими значениями
