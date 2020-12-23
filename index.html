@@ -58,21 +58,32 @@
         <form
           name="profileInfoForm"
           class="popup__form"
+          novalidate
         >
           <h3 class="popup__title">Редактировать профиль</h3>
           <div class="popup__profile-text">
             <input
+              id="name-input"
               name="inputName"
               type="text"
               class="popup__input popup__input_type_name"
               value="Иван Иванов"
+              minlength="2"
+              maxlength="40"
+              required
             >
+            <span class="name-input-error popup__input-error"></span>
             <input
+              id="job-input"
               name="inputJob"
               type="text"
               class="popup__input popup__input_type_job"
               value="Кибер-фермер"
+              minlength="2"
+              maxlength="200"
+              required
             >
+            <span class="job-input-error popup__input-error"></span>
           </div>
           <button
             type="submit"
@@ -94,18 +105,25 @@
           <h3 class="popup__title">Новое место</h3>
           <div class="popup__profile-text popup__profile-text_type_card-add">
             <input
+              id="place-input"
               name="inputPlace"
               type="text"
               class="popup__input popup__input_type_place popup__input_type_card-add"
               placeholder="Название"
+              minlength="2"
+              maxlength="30"
+              required
             >
+            <span class="place-input-error popup__input-error"></span>
             <input
+              id="link-input"
               name="inputImgLink"
               type="url"
               class="popup__input popup__input_type_link popup__input_type_card-add"
               placeholder="Ссылка на картинку"
               required
             >
+            <span class="link-input-error popup__input-error"></span>
           </div>
           <button
             type="submit"
@@ -150,6 +168,7 @@
     </article>
   </template>
   <script src="scripts/script.js"></script>
+  <script src="scripts/validate.js"></script>
 </body>
 
 </html>

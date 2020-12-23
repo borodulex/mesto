@@ -137,7 +137,6 @@ function removeCardHandler(element) {
   })
 }
 
-
 editButton.addEventListener("click", () => {
   //Автозаполнение полей ввода текущими значениями
   nameInput.value = nameElement.textContent;
@@ -159,6 +158,4 @@ closeButtonPopupPreview.addEventListener("click", () => {
 });
 editFormElement.addEventListener("submit", editFormSubmitHandler);
 newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
-
-
 
