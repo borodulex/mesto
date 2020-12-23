@@ -116,6 +116,17 @@ function initCardElement(name, link) {
 // Открытие попапа при нажатии на кнопку редактирования
 function showPopup(popupElement) {
   popupElement.classList.add("popup_opened");
+
+  //закрытие попапа при нажатии на оверлей
+  popupElement.addEventListener('click', (evt) => {
+    closePopup(evt.target);
+  });
+  //закрытие попапа при нажатии на клавишу Escape
+  document.addEventListener('keyup', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popupElement);
+    }
+  });
 }
 
 // Закрытие попапа при нажатии на кнопку крестика
@@ -158,4 +169,5 @@ closeButtonPopupPreview.addEventListener("click", () => {
 });
 editFormElement.addEventListener("submit", editFormSubmitHandler);
 newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
+
 
