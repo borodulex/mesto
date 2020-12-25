@@ -23,32 +23,8 @@ const newItemFormElement = popupNewItem.querySelector(".popup__form");
 const placeInput = popupNewItem.querySelector(".popup__input_type_place");
 const linkInput = popupNewItem.querySelector(".popup__input_type_link");
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const popupCaption = popupPreview.querySelector(".popup__caption");
+const popupImage = popupPreview.querySelector(".popup__image");
 
 // Предварительная загрузка карточек при загрузке страницы
 initialCards.forEach(function (item) {
@@ -85,8 +61,6 @@ function showPopupPreviewHandler(element) {
   element.querySelector(".card__image").addEventListener("click", evt => {
     const cardTitle = evt.target.parentElement.querySelector(".card__title").textContent;
     const cardImgSrc = evt.target.src;
-    const popupCaption = popupPreview.querySelector(".popup__caption");
-    const popupImage = popupPreview.querySelector(".popup__image");
 
     popupCaption.textContent = cardTitle;
     popupImage.src = cardImgSrc;
@@ -113,24 +87,51 @@ function initCardElement(name, link) {
   return cardElement;
 }
 
-// Открытие попапа при нажатии на кнопку редактирования
-function showPopup(popupElement) {
-  popupElement.classList.add("popup_opened");
-
-  //закрытие попапа при нажатии на оверлей
-  popupElement.addEventListener('click', (evt) => {
+function closePopupByClickOnOverlay(evt) {
+  if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
-  });
-  //закрытие попапа при нажатии на клавишу Escape
-  document.addEventListener('keyup', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popupElement);
-    }
-  });
+  }
 }
 
-// Закрытие попапа при нажатии на кнопку крестика
+function closePopupByClickOnEscapeButton(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
+//сброс формы и удаление ошибок при закрытии popup
+function resetPopup(popupElement) {
+  const popupForm = popupElement.querySelector('.popup__form');
+  const formElement = popupElement.querySelector('.popup__form');
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) => {
+    const formError = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('popup__input_type_error');
+    formError.classList.remove('popup__input-error_visible');
+    formError.textContent = '';
+  })
+  popupForm.reset();
+}
+
+// Открытие попапа
+function showPopup(popupElement) {
+  popupElement.classList.add("popup_opened");
+  //слушатель для закрытия попапа при нажатии на оверлей
+  popupElement.addEventListener('click', closePopupByClickOnOverlay);
+  //слушатель для закрытия попапа при нажатии на клавишу Escape
+  document.addEventListener('keydown', closePopupByClickOnEscapeButton);
+}
+
+// Закрытие попапа
 function closePopup(popupElement) {
+  //снятие слушателя для закрытия попапа при нажатии на оверлей
+  popupElement.removeEventListener('click', closePopupByClickOnOverlay);
+  //снятие слушателя для закрытия попапа при нажатии на клавишу Escape
+  document.removeEventListener('keydown', closePopupByClickOnEscapeButton);
+
+  resetPopup(popupElement);
+
   popupElement.classList.remove("popup_opened");
 }
 
@@ -169,5 +170,7 @@ closeButtonPopupPreview.addEventListener("click", () => {
 });
 editFormElement.addEventListener("submit", editFormSubmitHandler);
 newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
+
+
 
 
