@@ -1,6 +1,9 @@
+import { initialCards } from './initial-cards.js';
+import Card from './Card.js';
+
 const popupEdit = document.querySelector(".popup_type_profile-edit");
 const popupNewItem = document.querySelector(".popup_type_card-add");
-const popupPreview = document.querySelector(".popup_type_preview");
+export const popupPreview = document.querySelector(".popup_type_preview");
 const profileNode = document.querySelector(".profile");
 const cardsNode = document.querySelector('.cards__grid');
 
@@ -23,68 +26,37 @@ const newItemFormElement = popupNewItem.querySelector(".popup__form");
 const placeInput = popupNewItem.querySelector(".popup__input_type_place");
 const linkInput = popupNewItem.querySelector(".popup__input_type_link");
 
-const popupCaption = popupPreview.querySelector(".popup__caption");
-const popupImage = popupPreview.querySelector(".popup__image");
+export const popupCaption = popupPreview.querySelector(".popup__caption");
+export const popupImage = popupPreview.querySelector(".popup__image");
 
-// Предварительная загрузка карточек при загрузке страницы
-initialCards.forEach(function (item) {
-  const placeName = item.name;
-  const placeImgLink = item.link;
-  const preparedCard = initCardElement(placeName, placeImgLink);
-  cardsNode.append(preparedCard);
+
+//------------------------PRELOAD CARDS-----------------------------
+
+initialCards.forEach(item => {
+  const card = new Card(item, '#card-template', showPopup);
+  const cardElement = card.generateCard();
+  cardsNode.append(cardElement);
 });
 
-//Функционал popupEdit
-function editFormSubmitHandler(evt) {
-  //Отмена стандартной отправки формы
-  evt.preventDefault();
 
-  nameElement.textContent = nameInput.value;
-  jobElement.textContent = jobInput.value;
+//------------------------POPUP HANDLERS-----------------------------
 
-  closePopup(popupEdit);
+export function showPopup(popupElement) {
+  popupElement.classList.add("popup_opened");
+
+  popupElement.addEventListener('click', closePopupByClickOnOverlay);
+  document.addEventListener('keyup', closePopupByClickOnEscapeButton);
 }
 
-//Функционал popupNewItem
-function newItemFormSubmitHandler(evt) {
-  evt.preventDefault();
-  const placeName = placeInput.value;
-  const placeImgLink = linkInput.value;
-  const preparedCard = initCardElement(placeName, placeImgLink);
-  cardsNode.prepend(preparedCard);
-  newItemFormElement.reset();
-  closePopup(popupNewItem);
-}
+function closePopup(popupElement) {
+  popupElement.removeEventListener('click', closePopupByClickOnOverlay);
+  document.removeEventListener('keydown', closePopupByClickOnEscapeButton);
 
-// Открытие попапа с превью при нажатии на изображение
-function showPopupPreviewHandler(element) {
-  element.querySelector(".card__image").addEventListener("click", evt => {
-    const cardTitle = evt.target.parentElement.querySelector(".card__title").textContent;
-    const cardImgSrc = evt.target.src;
+  if (!popupElement.classList.contains('popup_type_preview')) {
+    resetPopup(popupElement);
+  }
 
-    popupCaption.textContent = cardTitle;
-    popupImage.src = cardImgSrc;
-    popupImage.alt = cardTitle;
-
-    showPopup(popupPreview);
-  });
-}
-
-//Функция подготовки новой карточки
-function initCardElement(name, link) {
-  const cardElement = cardTemplate.content.cloneNode(true);
-  const cardTitleElement = cardElement.querySelector('.card__title');
-  const cardImageElement = cardElement.querySelector('.card__image');
-
-  cardTitleElement.textContent = name;
-  cardImageElement.src = link;
-  cardImageElement.alt = name;
-
-  likeButtonHandler(cardElement);
-  removeCardHandler(cardElement);
-  showPopupPreviewHandler(cardElement);
-
-  return cardElement;
+  popupElement.classList.remove("popup_opened");
 }
 
 function closePopupByClickOnOverlay(evt) {
@@ -100,9 +72,7 @@ function closePopupByClickOnEscapeButton(evt) {
   }
 }
 
-//сброс формы и удаление ошибок при закрытии popup
 function resetPopup(popupElement) {
-  const popupForm = popupElement.querySelector('.popup__form');
   const formElement = popupElement.querySelector('.popup__form');
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   inputList.forEach((inputElement) => {
@@ -111,66 +81,66 @@ function resetPopup(popupElement) {
     formError.classList.remove('popup__input-error_visible');
     formError.textContent = '';
   })
-  popupForm.reset();
+  formElement.reset();
 }
 
-// Открытие попапа
-function showPopup(popupElement) {
-  popupElement.classList.add("popup_opened");
-  //слушатель для закрытия попапа при нажатии на оверлей
-  popupElement.addEventListener('click', closePopupByClickOnOverlay);
-  //слушатель для закрытия попапа при нажатии на клавишу Escape
-  document.addEventListener('keydown', closePopupByClickOnEscapeButton);
-}
+closeButtonPopupPreview.addEventListener("click", () => {
+  closePopup(popupPreview);
+});
 
-// Закрытие попапа
-function closePopup(popupElement) {
-  //снятие слушателя для закрытия попапа при нажатии на оверлей
-  popupElement.removeEventListener('click', closePopupByClickOnOverlay);
-  //снятие слушателя для закрытия попапа при нажатии на клавишу Escape
-  document.removeEventListener('keydown', closePopupByClickOnEscapeButton);
 
-  resetPopup(popupElement);
+//------------------------EDIT POPUP---------------------------------
 
-  popupElement.classList.remove("popup_opened");
-}
+//Функционал popupEdit
+function editFormSubmitHandler(evt) {
+  evt.preventDefault();
 
-// Функционал кнопки лайк
-function likeButtonHandler(element) {
-  element.querySelector(".card__button-like").addEventListener("click", evt => {
-    evt.target.classList.toggle("card__button-like_active");
-  });
-}
+  nameElement.textContent = nameInput.value;
+  jobElement.textContent = jobInput.value;
 
-// Функционал кнопки удаления карточки
-function removeCardHandler(element) {
-  element.querySelector(".card__button-remove").addEventListener("click", evt => {
-    evt.target.closest(".card").remove();
-  })
+  closePopup(popupEdit);
 }
 
 editButton.addEventListener("click", () => {
-  //Автозаполнение полей ввода текущими значениями
+
   nameInput.value = nameElement.textContent;
   jobInput.value = jobElement.textContent;
 
   showPopup(popupEdit);
 });
-addButton.addEventListener("click", () => {
-  showPopup(popupNewItem);
-});
+
+editFormElement.addEventListener("submit", editFormSubmitHandler);
+
 closeButtonPopupEdit.addEventListener("click", () => {
   closePopup(popupEdit);
 });
+
+
+//-------------------NEW ITEM POPUP-----------------------
+
+//Функционал popupNewItem
+function newItemFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  const data = {};
+  data.name = placeInput.value;
+  data.link = linkInput.value;
+  const card = new Card(data, '#card-template', showPopup);
+
+  const cardElement = card.generateCard();
+  cardsNode.prepend(cardElement);
+
+  evt.target.reset();
+  closePopup(popupNewItem);
+}
+
+addButton.addEventListener("click", () => {
+  showPopup(popupNewItem);
+});
+
 closeButtonPopupNewItem.addEventListener("click", () => {
   closePopup(popupNewItem);
 });
-closeButtonPopupPreview.addEventListener("click", () => {
-  closePopup(popupPreview);
-});
-editFormElement.addEventListener("submit", editFormSubmitHandler);
+
 newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
-
-
-
 
