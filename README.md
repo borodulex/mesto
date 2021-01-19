@@ -13,8 +13,9 @@
 
 ## Использованные языки, технологии и методологии
 
-- _(new)_ Javascript
-- _(new)_ HTML form
+- _(new)_ JS form validation
+- Javascript
+- HTML form
 - Grid layout
 - Media queries
 - Font smoothing
