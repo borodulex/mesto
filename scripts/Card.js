@@ -47,7 +47,7 @@ export default class Card {
     const cardTitle = element.parentElement.querySelector('.card__title').textContent;
     const cardImgSrc = element.src;
 
-    popupCaption.textContent = cardTitle; //подумать над именем переменной
+    popupCaption.textContent = cardTitle;
     popupImage.src = cardImgSrc;
     popupImage.alt = cardTitle;
 

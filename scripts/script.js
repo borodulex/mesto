@@ -1,13 +1,13 @@
 import { initialCards } from './initial-cards.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const popupEdit = document.querySelector(".popup_type_profile-edit");
 const popupNewItem = document.querySelector(".popup_type_card-add");
 export const popupPreview = document.querySelector(".popup_type_preview");
+
 const profileNode = document.querySelector(".profile");
 const cardsNode = document.querySelector('.cards__grid');
-
-const cardTemplate = document.querySelector('#card-template');
 
 const editButton = profileNode.querySelector(".profile__button-edit");
 const addButton = profileNode.querySelector(".profile__button-add");
@@ -29,42 +29,30 @@ const linkInput = popupNewItem.querySelector(".popup__input_type_link");
 export const popupCaption = popupPreview.querySelector(".popup__caption");
 export const popupImage = popupPreview.querySelector(".popup__image");
 
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+const formConfig = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_visible'
+}
 
-//------------------------PRELOAD CARDS-----------------------------
-
+// Предварительная загрузка карточек
 initialCards.forEach(item => {
   const card = new Card(item, '#card-template', showPopup);
   const cardElement = card.generateCard();
   cardsNode.append(cardElement);
 });
 
-
-//------------------------POPUP HANDLERS-----------------------------
-
-export function showPopup(popupElement) {
-  popupElement.classList.add("popup_opened");
-
-  popupElement.addEventListener('click', closePopupByClickOnOverlay);
-  document.addEventListener('keyup', closePopupByClickOnEscapeButton);
-}
-
-function closePopup(popupElement) {
-  popupElement.removeEventListener('click', closePopupByClickOnOverlay);
-  document.removeEventListener('keydown', closePopupByClickOnEscapeButton);
-
-  if (!popupElement.classList.contains('popup_type_preview')) {
-    resetPopup(popupElement);
-  }
-
-  popupElement.classList.remove("popup_opened");
-}
-
+// Закрытие открытого попапа при клике на оверлей
 function closePopupByClickOnOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
   }
 }
 
+// Закрытие открытого попапа при нажатии клавишу Esc
 function closePopupByClickOnEscapeButton(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -72,6 +60,7 @@ function closePopupByClickOnEscapeButton(evt) {
   }
 }
 
+// Очистка формы (используется при закрытии попапа)
 function resetPopup(popupElement) {
   const formElement = popupElement.querySelector('.popup__form');
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
@@ -84,14 +73,27 @@ function resetPopup(popupElement) {
   formElement.reset();
 }
 
-closeButtonPopupPreview.addEventListener("click", () => {
-  closePopup(popupPreview);
-});
+// Отображение попапа
+export function showPopup(popupElement) {
+  popupElement.classList.add("popup_opened");
 
+  popupElement.addEventListener('click', closePopupByClickOnOverlay);
+  document.addEventListener('keyup', closePopupByClickOnEscapeButton);
+}
 
-//------------------------EDIT POPUP---------------------------------
+// Скрытие попапа
+function closePopup(popupElement) {
+  popupElement.removeEventListener('click', closePopupByClickOnOverlay);
+  document.removeEventListener('keydown', closePopupByClickOnEscapeButton);
 
-//Функционал popupEdit
+  if (!popupElement.classList.contains('popup_type_preview')) {
+    resetPopup(popupElement);
+  }
+
+  popupElement.classList.remove("popup_opened");
+}
+
+// Функционал кнопки попапа редактирования профиля
 function editFormSubmitHandler(evt) {
   evt.preventDefault();
 
@@ -101,24 +103,7 @@ function editFormSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-editButton.addEventListener("click", () => {
-
-  nameInput.value = nameElement.textContent;
-  jobInput.value = jobElement.textContent;
-
-  showPopup(popupEdit);
-});
-
-editFormElement.addEventListener("submit", editFormSubmitHandler);
-
-closeButtonPopupEdit.addEventListener("click", () => {
-  closePopup(popupEdit);
-});
-
-
-//-------------------NEW ITEM POPUP-----------------------
-
-//Функционал popupNewItem
+// Функционал кнопки попапа добавления новой карточки
 function newItemFormSubmitHandler(evt) {
   evt.preventDefault();
 
@@ -134,13 +119,35 @@ function newItemFormSubmitHandler(evt) {
   closePopup(popupNewItem);
 }
 
-addButton.addEventListener("click", () => {
-  showPopup(popupNewItem);
+// Активация валидации форм
+formList.forEach(formElement => {
+  const form = new FormValidator(formConfig, formElement);
+  form.enableValidation();
+});
+
+closeButtonPopupPreview.addEventListener("click", () => {
+  closePopup(popupPreview);
+});
+
+closeButtonPopupEdit.addEventListener("click", () => {
+  closePopup(popupEdit);
 });
 
 closeButtonPopupNewItem.addEventListener("click", () => {
   closePopup(popupNewItem);
 });
 
-newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
+editButton.addEventListener("click", () => {
 
+  nameInput.value = nameElement.textContent;
+  jobInput.value = jobElement.textContent;
+
+  showPopup(popupEdit);
+});
+
+addButton.addEventListener("click", () => {
+  showPopup(popupNewItem);
+});
+
+editFormElement.addEventListener("submit", editFormSubmitHandler);
+newItemFormElement.addEventListener("submit", newItemFormSubmitHandler);
