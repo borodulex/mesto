@@ -13,7 +13,8 @@
 
 ## Использованные языки, технологии и методологии
 
-- _(new)_ JS form validation
+- _(new)_ Object-oriented programming (OOP)
+- JS form validation
 - Javascript
 - HTML form
 - Grid layout
