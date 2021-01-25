@@ -38,6 +38,8 @@ const formConfig = {
   errorClass: 'popup__input-error_visible'
 }
 
+const formClassObjects = {};
+
 // Предварительная загрузка карточек
 initialCards.forEach(item => {
   const card = new Card(item, '#card-template', showPopup);
@@ -48,7 +50,11 @@ initialCards.forEach(item => {
 // Закрытие открытого попапа при клике на оверлей
 function closePopupByClickOnOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target);
+    if (evt.target.classList.contains('popup_type_preview')) {
+      closePopup(evt.target);
+    } else {
+      closePopupWithForm(evt.target);
+    }
   }
 }
 
@@ -56,7 +62,11 @@ function closePopupByClickOnOverlay(evt) {
 function closePopupByClickOnEscapeButton(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
+    if (openedPopup.classList.contains('popup_type_preview')) {
+      closePopup(openedPopup);
+    } else {
+      closePopupWithForm(openedPopup);
+    }
   }
 }
 
@@ -65,10 +75,8 @@ function resetPopup(popupElement) {
   const formElement = popupElement.querySelector('.popup__form');
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   inputList.forEach((inputElement) => {
-    const formError = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove('popup__input_type_error');
-    formError.classList.remove('popup__input-error_visible');
-    formError.textContent = '';
+    const formClassObject = formClassObjects[formElement.name];
+    formClassObject.hideInputError(inputElement);
   })
   formElement.reset();
 }
@@ -86,11 +94,13 @@ function closePopup(popupElement) {
   popupElement.removeEventListener('click', closePopupByClickOnOverlay);
   document.removeEventListener('keydown', closePopupByClickOnEscapeButton);
 
-  if (!popupElement.classList.contains('popup_type_preview')) {
-    resetPopup(popupElement);
-  }
-
   popupElement.classList.remove("popup_opened");
+}
+
+// Скрытие попапа с формой
+function closePopupWithForm(popupElement) {
+  resetPopup(popupElement);
+  closePopup(popupElement);
 }
 
 // Функционал кнопки попапа редактирования профиля
@@ -116,13 +126,19 @@ function newItemFormSubmitHandler(evt) {
   cardsNode.prepend(cardElement);
 
   evt.target.reset();
-  closePopup(popupNewItem);
+
+  closePopupWithForm(popupNewItem);
 }
 
 // Активация валидации форм
 formList.forEach(formElement => {
   const form = new FormValidator(formConfig, formElement);
+  const formName = form._form.name;
+
   form.enableValidation();
+
+  //необходимо для доступа к объекту класса формы в глобальном лексическом окружении
+  formClassObjects[formName] = form;
 });
 
 closeButtonPopupPreview.addEventListener("click", () => {
@@ -130,11 +146,11 @@ closeButtonPopupPreview.addEventListener("click", () => {
 });
 
 closeButtonPopupEdit.addEventListener("click", () => {
-  closePopup(popupEdit);
+  closePopupWithForm(popupEdit);
 });
 
 closeButtonPopupNewItem.addEventListener("click", () => {
-  closePopup(popupNewItem);
+  closePopupWithForm(popupNewItem);
 });
 
 editButton.addEventListener("click", () => {
