@@ -1,4 +1,4 @@
-import { popupPreview, popupCaption, popupImage } from './script.js';
+import { popupPreview, popupCaption, popupImage } from './index.js';
 
 export default class Card {
   constructor(data, cardSelector, showPopup) {
@@ -44,12 +44,9 @@ export default class Card {
   }
 
   _handlePreviewPopup(element) {
-    const cardTitle = element.parentElement.querySelector('.card__title').textContent;
-    const cardImgSrc = element.src;
-
-    popupCaption.textContent = cardTitle;
-    popupImage.src = cardImgSrc;
-    popupImage.alt = cardTitle;
+    popupCaption.textContent = this._name;
+    popupImage.src = this._imgLink;
+    popupImage.alt = this._name;
 
     this._showPopup(popupPreview);
   }
