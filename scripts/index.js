@@ -1,6 +1,7 @@
 import { initialCards } from './initial-cards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 const popupEdit = document.querySelector(".popup_type_profile-edit");
 const popupNewItem = document.querySelector(".popup_type_card-add");
@@ -8,6 +9,8 @@ export const popupPreview = document.querySelector(".popup_type_preview");
 
 const profileNode = document.querySelector(".profile");
 const cardsNode = document.querySelector('.cards__grid');
+
+const cardListSection = '.cards__grid';
 
 const editButton = profileNode.querySelector(".profile__button-edit");
 const addButton = profileNode.querySelector(".profile__button-add");
@@ -36,16 +39,31 @@ const formConfig = {
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible'
-}
+};
 
 const formClassObjects = {};
 
 // Предварительная загрузка карточек
-initialCards.forEach(item => {
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '#card-template', showPopup);
+    const cardElement = card.generateCard();
+
+    cardList.addItem(cardElement);
+  }
+},
+  cardListSection
+);
+
+cardList.renderItems();
+
+
+/* initialCards.forEach(item => {
   const card = new Card(item, '#card-template', showPopup);
   const cardElement = card.generateCard();
   cardsNode.append(cardElement);
-});
+}); */
 
 // Закрытие открытого попапа при клике на оверлей
 function closePopupByClickOnOverlay(evt) {
