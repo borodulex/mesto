@@ -1,5 +1,3 @@
-/* import { popupPreview, popupCaption, popupImage } from './index.js'; */
-
 export default class Card {
   constructor({ item, handleCardClick }, cardSelector) {
     this._item = item;
@@ -41,14 +39,6 @@ export default class Card {
       this._handleLikeButton(evt.target);
     });
   }
-
-  /*   _handlePreviewPopup(element) {
-      popupCaption.textContent = this._name;
-      popupImage.src = this._imgLink;
-      popupImage.alt = this._name;
-
-      this._showPopup(popupPreview);
-    } */
 
   _handleRemoveButton(element) {
     element.closest(".card").remove();
