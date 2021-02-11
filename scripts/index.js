@@ -39,11 +39,8 @@ const cardList = new Section({
   cardListSection
 );
 
-cardList.renderItems();
-
 // Класс попапа для предварительного просмотра изображения карточки
 const previewPopup = new PopupWithImage(previewPopupSelector);
-previewPopup.setEventListeners();
 
 // Класс попапа для добавления новой карточки
 const newCardPopup = new PopupWithForm({
@@ -61,8 +58,6 @@ const newCardPopup = new PopupWithForm({
     cardList.addItem(cardElement);
   }
 });
-newCardPopup.setEventListeners();
-addButton.addEventListener('click', newCardPopup.open.bind(newCardPopup));
 
 // Класс информации о пользователе
 const userInfoClass = new UserInfo({
@@ -77,13 +72,6 @@ const userInfoPopup = new PopupWithForm({
     userInfoClass.setUserInfo(data);
   }
 });
-userInfoPopup.setEventListeners();
-editButton.addEventListener('click', () => {
-  const { currentName, currentJob } = userInfoClass.getUserInfo();
-  nameInput.value = currentName;
-  jobInput.value = currentJob;
-  userInfoPopup.open()
-});
 
 // Активация валидации форм
 formList.forEach(formElement => {
@@ -94,4 +82,18 @@ formList.forEach(formElement => {
 
   //необходимо для доступа к объекту класса формы в глобальном лексическом окружении
   formClassObjects[formName] = form;
+});
+
+cardList.renderItems();
+
+previewPopup.setEventListeners();
+newCardPopup.setEventListeners();
+userInfoPopup.setEventListeners();
+
+addButton.addEventListener('click', newCardPopup.open.bind(newCardPopup));
+editButton.addEventListener('click', () => {
+  const { currentName, currentJob } = userInfoClass.getUserInfo();
+  nameInput.value = currentName;
+  jobInput.value = currentJob;
+  userInfoPopup.open()
 });
