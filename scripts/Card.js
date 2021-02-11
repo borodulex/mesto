@@ -1,11 +1,12 @@
-import { popupPreview, popupCaption, popupImage } from './index.js';
+/* import { popupPreview, popupCaption, popupImage } from './index.js'; */
 
 export default class Card {
-  constructor(data, cardSelector, showPopup) {
-    this._name = data.name;
-    this._imgLink = data.link;
+  constructor({ item, handleCardClick }, cardSelector) {
+    this._item = item;
+    this._name = item.name;
+    this._imgLink = item.link;
     this._cardSelector = cardSelector;
-    this._showPopup = showPopup;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -32,9 +33,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__image').addEventListener('click', evt => {
-      this._handlePreviewPopup(evt.target);
-    });
+    this._element.querySelector('.card__image').addEventListener('click', () => { this._handleCardClick() });
     this._element.querySelector('.card__button-remove').addEventListener('click', evt => {
       this._handleRemoveButton(evt.target);
     });
@@ -43,13 +42,13 @@ export default class Card {
     });
   }
 
-  _handlePreviewPopup(element) {
-    popupCaption.textContent = this._name;
-    popupImage.src = this._imgLink;
-    popupImage.alt = this._name;
+  /*   _handlePreviewPopup(element) {
+      popupCaption.textContent = this._name;
+      popupImage.src = this._imgLink;
+      popupImage.alt = this._name;
 
-    this._showPopup(popupPreview);
-  }
+      this._showPopup(popupPreview);
+    } */
 
   _handleRemoveButton(element) {
     element.closest(".card").remove();
