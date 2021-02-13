@@ -30,7 +30,6 @@ export default class PopupWithFrom extends Popup {
     });
   }
 
-
   close() {
     super.close();
 
