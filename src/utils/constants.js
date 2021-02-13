@@ -13,6 +13,7 @@ export const cardListSection = '.cards__grid';
 
 export const formList = Array.from(document.querySelectorAll('.popup__form'));
 export const formConfig = {
+  formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',

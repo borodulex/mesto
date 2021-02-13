@@ -40,5 +40,6 @@ export default class PopupWithFrom extends Popup {
       formClassObject.hideInputError(inputElement);
     });
     this._formElement.reset();
+    formClassObjects[this._formElement.name].toggleButtonState();
   }
 }

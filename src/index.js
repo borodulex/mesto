@@ -91,7 +91,7 @@ previewPopup.setEventListeners();
 newCardPopup.setEventListeners();
 userInfoPopup.setEventListeners();
 
-addButton.addEventListener('click', newCardPopup.open.bind(newCardPopup));
+addButton.addEventListener('click', () => { newCardPopup.open() });
 editButton.addEventListener('click', () => {
   const { currentName, currentJob } = userInfoClass.getUserInfo();
   nameInput.value = currentName;
