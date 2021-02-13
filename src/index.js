@@ -46,18 +46,7 @@ const previewPopup = new PopupWithImage(previewPopupSelector);
 // Класс попапа для добавления новой карточки
 const newCardPopup = new PopupWithForm({
   popupSelector: newCardPopupSelector,
-  formHandler: (item) => {
-    const card = new Card({
-      item,
-      handleCardClick: () => {
-        previewPopup.open(item);
-      }
-    },
-      '#card-template');
-    const cardElement = card.generateCard();
-
-    cardList.addItem(cardElement);
-  }
+  formHandler: cardList.renderer,
 });
 
 // Класс информации о пользователе
