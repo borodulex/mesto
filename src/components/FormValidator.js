@@ -7,7 +7,6 @@ export default class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._form = form;
-
   }
 
   _showInputError(inputElement, errorMessage) {

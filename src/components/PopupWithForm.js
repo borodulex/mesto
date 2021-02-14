@@ -2,11 +2,12 @@ import Popup from './Popup.js';
 import { formClassObjects } from '../utils/constants.js';
 
 export default class PopupWithFrom extends Popup {
-  constructor({ popupSelector, formHandler }) {
+  constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
-    this._formHandler = formHandler;
+    this._handleFormSubmit = handleFormSubmit;
     this._popupContainer = this._popupElement.querySelector('.popup__container');
     this._formElement = this._popupElement.querySelector('.popup__form');
+    this._formName = this._formElement.attributes['name'].value;
   }
 
   _getInputValues() {
@@ -20,12 +21,12 @@ export default class PopupWithFrom extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    // предотвращение всплытия, перенести в наследовательный элемент
+    // предотвращение всплытия
     this._popupContainer.addEventListener('click', evt => evt.stopPropagation());
 
     this._formElement.addEventListener('submit', evt => {
       evt.preventDefault();
-      this._formHandler(this._getInputValues());
+      this._handleFormSubmit(this._getInputValues());
       this.close();
     });
   }
@@ -35,10 +36,11 @@ export default class PopupWithFrom extends Popup {
 
     const inputList = Array.from(this._formElement.querySelectorAll('.popup__input'));
     inputList.forEach(inputElement => {
-      const formClassObject = formClassObjects[this._formElement.name];
+      const formClassObject = formClassObjects[this._formName];
       formClassObject.hideInputError(inputElement);
     });
     this._formElement.reset();
-    formClassObjects[this._formElement.name].toggleButtonState();
+
+    formClassObjects[this._formName].toggleButtonState();
   }
 }

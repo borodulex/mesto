@@ -46,7 +46,9 @@ const previewPopup = new PopupWithImage(previewPopupSelector);
 // Класс попапа для добавления новой карточки
 const newCardPopup = new PopupWithForm({
   popupSelector: newCardPopupSelector,
-  formHandler: cardList.renderer,
+  handleFormSubmit: (data) => {
+    cardList.renderer(data);
+  }
 });
 
 // Класс информации о пользователе
@@ -58,7 +60,7 @@ const userInfoClass = new UserInfo({
 // Класс попапа для редактирования информации о пользователе
 const userInfoPopup = new PopupWithForm({
   popupSelector: userInfoPopupSelector,
-  formHandler: (data) => {
+  handleFormSubmit: (data) => {
     userInfoClass.setUserInfo(data);
   }
 });
@@ -66,11 +68,9 @@ const userInfoPopup = new PopupWithForm({
 // Активация валидации форм
 formList.forEach(formElement => {
   const form = new FormValidator(formConfig, formElement);
-  const formName = form._form.name;
-
+  const formName = formElement.attributes['name'].value;
   form.enableValidation();
-
-  //необходимо для доступа к объекту класса формы в глобальном лексическом окружении
+  // Необходимо для доступа к объекту класса формы в глобальном лексическом окружении
   formClassObjects[formName] = form;
 });
 
