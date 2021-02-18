@@ -13,8 +13,9 @@
 
 ## Использованные языки, технологии и методологии
 
-- _(new)_ webpack
-- _(new)_ Destructuring
+- _(new)_ API
+- webpack
+- Destructuring
 - Object-oriented programming (OOP)
 - JS form validation
 - Javascript
