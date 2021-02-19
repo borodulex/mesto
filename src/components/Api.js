@@ -4,17 +4,19 @@ export default class Api {
     this._headers = headers;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject('Сервер недоступен');
+  }
+
   getUserInfo = () => {
     return fetch(`${this._url}users/me`, {
       method: "GET",
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   editUserInfo = (data) => {
@@ -23,12 +25,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   getCards = () => {
@@ -36,12 +33,7 @@ export default class Api {
       method: "GET",
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   addCard = (data) => {
@@ -50,12 +42,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   deleteCard = (cardId) => {
@@ -63,12 +50,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   like = (cardId) => {
@@ -76,12 +58,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   dislike = (cardId) => {
@@ -89,12 +66,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 
   updateAvatar = (data) => {
@@ -103,12 +75,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Сервер недоступен')
-      })
+      .then(this._checkResponse)
   }
 }
 

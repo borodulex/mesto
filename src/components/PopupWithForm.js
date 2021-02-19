@@ -1,9 +1,9 @@
 import Popup from './Popup.js';
-import { formClassObjects } from '../utils/constants.js';
 
 export default class PopupWithFrom extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
+  constructor({ popupSelector, formClassObjects, handleFormSubmit }) {
     super(popupSelector);
+    this._formClassObjects = formClassObjects;
     this._handleFormSubmit = handleFormSubmit;
     this._popupContainer = this._popupElement.querySelector('.popup__container');
     this._formElement = this._popupElement.querySelector('.popup__form');
@@ -37,12 +37,12 @@ export default class PopupWithFrom extends Popup {
 
     const inputList = Array.from(this._formElement.querySelectorAll('.popup__input'));
     inputList.forEach(inputElement => {
-      const formClassObject = formClassObjects[this._formName];
+      const formClassObject = this._formClassObjects[this._formName];
       formClassObject.hideInputError(inputElement);
     });
     this._formElement.reset();
 
-    formClassObjects[this._formName].toggleButtonState();
+    this._formClassObjects[this._formName].toggleButtonState();
   }
 
   renderLoading(isLoading) {

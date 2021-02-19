@@ -44,6 +44,7 @@ const userInfoClass = new UserInfo({
 // Класс попапа для редактирования информации о пользователе
 const userInfoPopup = new PopupWithForm({
   popupSelector: userInfoPopupSelector,
+  formClassObjects,
   handleFormSubmit: (data) => {
     api
       .editUserInfo(data)
@@ -59,6 +60,7 @@ const userInfoPopup = new PopupWithForm({
 // Класс попапа для редактирования аватара
 const editAvatarPopup = new PopupWithForm({
   popupSelector: editAvatarPopupSelector,
+  formClassObjects,
   handleFormSubmit: (data) => {
     api
       .updateAvatar(data)
@@ -115,6 +117,7 @@ const previewPopup = new PopupWithImage(previewPopupSelector);
 // Класс попапа для добавления новой карточки
 const newCardPopup = new PopupWithForm({
   popupSelector: newCardPopupSelector,
+  formClassObjects,
   handleFormSubmit: (data) => {
     api
       .addCard(data)
