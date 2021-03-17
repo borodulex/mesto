@@ -1,6 +1,6 @@
 # Проект: Mesto
 
-Демо: [borodulex.github.io/mesto/index.html](https://borodulex.github.io/mesto/index.html)
+Демо: [borodulex.github.io/mesto](https://borodulex.github.io/mesto/index.html)
 
 ## О проекте
 
