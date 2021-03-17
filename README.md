@@ -1,4 +1,6 @@
-# Проект 4: Mesto
+# Проект: Mesto
+
+Демо: [borodulex.github.io/mesto/index.html](https://borodulex.github.io/mesto/index.html)
 
 ## О проекте
 
@@ -7,13 +9,13 @@
 
 Страница оптимизирована для следующих разрешений:
 
-- 1024px
+- 1280px
 - 768px
 - 320px
 
 ## Использованные языки, технологии и методологии
 
-- _(new)_ API
+- API
 - webpack
 - Destructuring
 - Object-oriented programming (OOP)
